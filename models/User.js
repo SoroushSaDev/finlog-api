@@ -21,20 +21,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
-      },
-    refreshToken: { type: String },
+    },
+    refreshToken: {type: String},
 });
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password'))
-      return next()
+        return next()
     this.password = await bcrypt.hash(this.password, 10)
     next()
-  })
-  
-  userSchema.methods.matchPassword = async function (enteredPassword) {
+})
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
-  }
+}
 
 module.exports = mongoose.model('User', userSchema);

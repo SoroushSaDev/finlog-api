@@ -105,13 +105,13 @@ exports.getBalance = async (req, res) => {
         const {id} = req.params;
         const transactions = await Transaction.find({account: id});
         const balance = transactions.reduce((acc, transaction) => {
-            return transaction.type === 'income' 
-                ? acc + transaction.amount 
+            return transaction.type === 'income'
+                ? acc + transaction.amount
                 : acc - transaction.amount;
         }, 0);
-        res.json({ balance });
+        res.json({balance});
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({error: err.message});
     }
 };
 
@@ -119,9 +119,9 @@ exports.getBalance = async (req, res) => {
 exports.getTransactions = async (req, res) => {
     try {
         const {id} = req.params;
-        const transactions = await Transaction.find({account: id}).sort({ date: -1 }).populate('user', 'name');
+        const transactions = await Transaction.find({account: id}).sort({date: -1}).populate('user', 'name');
         res.json(transactions);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({error: err.message});
     }
 };

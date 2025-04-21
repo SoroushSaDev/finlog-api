@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authorize } = require('../middleware/auth');
+const {authorize} = require('../middleware/auth');
 const accountController = require('../controllers/accountController');
 
 router.get('/', accountController.getAccounts);
