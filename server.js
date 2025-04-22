@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
 const {protect, authorize} = require('./middleware/auth');
 
@@ -23,7 +22,6 @@ app.use('/api', authRoutes);
 app.use('/api/accounts', protect, accountRoutes);
 app.use('/api/transactions', protect, transactionRoutes);
 app.use('/api/users', protect, authorize('admin'), userRoutes);
-
 
 // Connect to MongoDB
 const db = require('./config/db');
